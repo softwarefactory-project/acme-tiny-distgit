@@ -1,0 +1,13 @@
+[Unit]
+Description=check for acme certs about to expire and renew them
+ConditionKernelCommandLine=!rd.live.image
+After=network-online.target
+After=httpd.service nginx.service
+
+[Timer]
+OnBootSec=20min
+OnUnitInactiveSec=24h
+Unit=acme-tiny.service
+
+[Install]
+WantedBy=timers.target

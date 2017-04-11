@@ -1,0 +1,3 @@
+# Check daily for csrs in /var/lib/acme/csr that need signing or renewing
+# within 7 days.
+31 2 * * * acme /usr/libexec/acme-tiny/sign 7
