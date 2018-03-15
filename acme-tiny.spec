@@ -18,7 +18,7 @@
 
 Name:		acme-tiny
 Version:	0.1
-Release:	10.%{checkout}%{?dist}
+Release:	11.%{checkout}%{?dist}
 Summary:	Tiny auditable script to issue, renew Let's Encrypt certificates
 
 Group:		Applications/Internet
@@ -69,6 +69,8 @@ cp -p %{SOURCE1} %{SOURCE2} %{SOURCE8} .
 %if %{use_python3}
 sed -i.old -e '1,1 s/python$/python3/' *.py
 %endif
+# Fix new agreement
+sed -i 's#letsencrypt.org/documents/LE-SA.*#letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf",#' acme_tiny.py
 
 %build
 
@@ -135,6 +137,9 @@ exit 0
 /usr/sbin/cert-check
 
 %changelog
+* Fri Mar 16 2018 Tristan Cacqueray <tdecacqu@redhat.com> 0.1-11.20160810git5a7b4e7
+- Fix agreement url
+
 * Mon Aug 22 2016 Stuart D. Gathman <stuart@gathman.org> 0.1-10.20160810git5a7b4e7
 - Fix cert writable check in sign script
 - More tips in README-fedora.md
